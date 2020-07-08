@@ -1,14 +1,8 @@
 #pragma once
 #include <Windows.h>
 #include "Game.h"
-
-class Enemy {
-
-};
-
-class Player {
-
-};
+#include "RacingPlayer.h"
+#include "RacingEnemy.h"
 
 class Racing : Game {
 private:
@@ -17,6 +11,9 @@ private:
 	size_t delay;
 
 	vector<vector<bool>> auxiliaryField;
+
+	RacingPlayer player;
+	vector<RacingEnemy> enemies;
 
 public:
 	Racing() {
