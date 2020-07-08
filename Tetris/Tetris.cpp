@@ -20,6 +20,45 @@ void Tetris::ShowString(int x, int y, string str) {
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cord);
 }
 
+bool Tetris::IsUpdate() {
+	for (size_t i = 0; i < height; i++)
+		for (size_t j = 0; j < width; j++)
+			if (display[i][j] != gameField[i][j])
+				return true;
+
+	if (score != lastScore)
+		return true;
+
+	return false;
+}
+
+Moves Tetris::Move() {
+	if (_kbhit()) {
+		switch (_getch()) {
+			//w = 119; W = 87; Up arrow = 72
+		case 119: case 87: case 72:
+			return Moves::UP;
+			break;
+			//a = 97; A = 65; Left arrow = 75
+		case 97: case 65: case 75:
+			return Moves::LEFT;
+			break;
+			//s = 115; S = 83; Down arrow = 80
+		case 115: case 83: case 80:
+			return Moves::DOWN;
+			break;
+			//d = 100; D = 68; Right arrow = 77
+		case 100: case 68: case 77:
+			return Moves::RIGHT;
+			break;
+			//Enter
+		case 13:
+			return Moves::ENTER;
+			break;
+		}
+	}
+}
+
 Tetris::Tetris() {
 	CONSOLE_CURSOR_INFO structCursorInfo;
 	GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &structCursorInfo);
@@ -41,7 +80,7 @@ Tetris::Tetris() {
 		for (size_t j = 0; j < width; j++) {
 			gameField[i][j] = true;
 			Update();
-			Sleep(20);
+			Sleep(10);
 		}
 	}
 }
@@ -56,7 +95,7 @@ void Tetris::Update() {
 					ShowChar(j * 2 + 1, i, 219);
 				}
 				else {
-					ShowChar(j * 2, i, ' ');
+					ShowString(j * 2, i, "  ");
 				}
 			}
 		}

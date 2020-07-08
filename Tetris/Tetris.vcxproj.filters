@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Abstract Classes">
+      <UniqueIdentifier>{ff660734-8988-4689-89da-5748e092e5cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Games">
+      <UniqueIdentifier>{7e78a704-1a6a-4fdd-9b73-4ba1d94a61de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Games\Racing">
+      <UniqueIdentifier>{9a33d603-89e4-49db-b0f7-87c636576b41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,9 +30,36 @@
     <ClCompile Include="Tetris.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Racing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RacingPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RacingEnemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tetris.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Abstract Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Header Files\Abstract Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Racing.h">
+      <Filter>Header Files\Games\Racing</Filter>
+    </ClInclude>
+    <ClInclude Include="RacingEnemy.h">
+      <Filter>Header Files\Games\Racing</Filter>
+    </ClInclude>
+    <ClInclude Include="RacingPlayer.h">
+      <Filter>Header Files\Games\Racing</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

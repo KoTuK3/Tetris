@@ -139,10 +139,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Racing.cpp" />
+    <ClCompile Include="RacingEnemy.cpp" />
+    <ClCompile Include="RacingPlayer.cpp" />
     <ClCompile Include="Tetris.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Helpers.h" />
+    <ClInclude Include="Racing.h" />
+    <ClInclude Include="RacingEnemy.h" />
+    <ClInclude Include="RacingPlayer.h" />
     <ClInclude Include="Tetris.h" />
+    <ClInclude Include="Unit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

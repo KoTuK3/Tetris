@@ -2,9 +2,14 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "windows.h"
+#include <conio.h>
+#include <Windows.h>
+
+#include "Game.h"
+#include "Helpers.h"
 
 using namespace std;
+
 
 class Tetris {
 private:
@@ -18,12 +23,17 @@ private:
 	vector<vector<bool>> gameField; // this field we can change
 	// display id used for output to the console
 	vector<vector<bool>> display;
+
+	vector<Game> games;
 	
 	void ShowChar(int x, int y, char character);
 	void ShowString(int x, int y, string str);
+	bool IsUpdate();
+	Moves Move();
 
 public:
 	Tetris();
 	void Update();
+
 };
 
