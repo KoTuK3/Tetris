@@ -1,4 +1,5 @@
 #include "Tetris.h"
+#include "Racing.h"
 
 void Tetris::ShowChar(int x, int y, char character) {
 	COORD cord;
@@ -59,6 +60,20 @@ Moves Tetris::Move() {
 	}
 }
 
+void Tetris::Play() {
+
+
+	Racing rc;
+	
+	//rc.Play(gameField, score);
+	bool isLose;
+	do {
+		isLose = rc.Play(gameField, score, Move());
+		Update();
+
+	} while (isLose);
+}
+
 Tetris::Tetris() {
 	CONSOLE_CURSOR_INFO structCursorInfo;
 	GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &structCursorInfo);
@@ -75,14 +90,14 @@ Tetris::Tetris() {
 
 	score = 0;
 	lastScore = 1;
-
-	for (size_t i = 0; i < height; i++) {
+	
+	/*for (size_t i = 0; i < height; i++) {
 		for (size_t j = 0; j < width; j++) {
 			gameField[i][j] = true;
 			Update();
 			Sleep(10);
 		}
-	}
+	}*/	
 }
 
 void Tetris::Update() {

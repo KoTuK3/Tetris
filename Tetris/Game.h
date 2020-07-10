@@ -2,10 +2,12 @@
 #include <iostream>
 #include <vector>
 
+#include "Helpers.h"
+
 using namespace std;
 
 class Game {
 public:
-	virtual void Play(vector<vector<bool>>& gameField, size_t& score) = 0;
+	virtual bool Play(vector<vector<bool>>& gameField, size_t& score, Moves move) = 0;
 };
 

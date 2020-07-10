@@ -2,15 +2,24 @@
 
 #include "Unit.h"
 
-class RacingEnemy : Unit {
+class RacingEnemy : public Unit {
 private:
-	bool enemySide; // false - left, true - right
-	int y = 2;
+	bool side; // false - left, true - right
+	size_t y;
+	size_t x;
 
 public:
-	void GenerateUnit() {
-		enemySide = rand() % 2;
+	RacingEnemy() {}
+
+	RacingEnemy(vector<vector<bool>>& auxiliaryField) {
+		GenerateUnit();
+		PutUnit(auxiliaryField, true);
+	}
+
+	void GenerateUnit() override {
+		side = rand() % 2;
 		y = 2;
+		x = int(side) * 3 + 3;
 	}
 	//Is create should be true
 	void PutUnit(vector<vector<bool>>& gameField, bool isCreate) override {
@@ -29,9 +38,16 @@ public:
 		gameField[y - 2][x + 1] = isCreate;
 	}
 
-	void Move() {
+	void Move(Moves moves) override {
 		y += 1;
 	}
 
+	size_t GetY() {
+		return y;
+	}
+
+	bool GetSide() {
+		return side;
+	}
 };
 

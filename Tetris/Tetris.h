@@ -30,10 +30,12 @@ private:
 	void ShowString(int x, int y, string str);
 	bool IsUpdate();
 	Moves Move();
+	
 
 public:
 	Tetris();
 	void Update();
+	void Play();
 
 };
 
