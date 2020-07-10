@@ -51,51 +51,50 @@ public:
 	//Test moves
 	bool Play(vector<vector<bool>>& gameField, size_t& score, Moves moves) override {
 			
-			bool isWall = auxiliaryField[height - 1][0];
+		bool isWall = auxiliaryField[height - 1][0];
 
+		player.PutUnit(auxiliaryField, false);
+
+		player.Move(moves);
+		SetDelay(player.GetDelay());
+
+		if (player.GetLastSide() != player.GetSide()) {
 			player.PutUnit(auxiliaryField, false);
+			player.SetLastSide(player.GetSide());
+		}
 
-			player.Move(moves);
+		auxiliaryField.pop_back();
+		vector<bool> newRow(width, 0);
+		newRow[0] = newRow[width - 1] = isWall;
+		auxiliaryField.insert(auxiliaryField.begin(), newRow);
 
-			if (player.GetLastSide() != player.GetSide()) {
-				player.PutUnit(auxiliaryField, false);
-				player.SetLastSide(player.GetSide());
+		if (CheckDist()) {
+			RacingEnemy enemy(auxiliaryField);
+			enemies.push_back(enemy);
+		}
+
+		for (size_t i = 0; i < enemies.size(); i++) {
+			enemies[i].Move(Moves::DOWN);
+		}
+
+		if (enemies[0].GetY() >= 27) {
+			enemies.erase(enemies.begin());
+		}
+
+		if (enemies[0].GetY() == 23) {
+			score++;
+		}
+
+		//generateCart();
+		player.PutUnit(auxiliaryField, true);
+
+		for (size_t i = 0; i < gameField.size(); i++) {
+			for (size_t j = 0; j < gameField[0].size(); j++) {
+				gameField[i][j] = auxiliaryField[i + 4][j];
 			}
+		}
 
-			auxiliaryField.pop_back();
-			vector<bool> newRow(width, 0);
-			newRow[0] = newRow[width - 1] = isWall;
-			auxiliaryField.insert(auxiliaryField.begin(), newRow);
-
-			if (CheckDist()) {
-				RacingEnemy enemy(auxiliaryField);
-				enemies.push_back(enemy);
-
-			}
-
-			for (size_t i = 0; i < enemies.size(); i++) {
-				enemies[i].Move(Moves::DOWN);
-			}
-
-			if (enemies[0].GetY() >= 27) {
-				enemies.erase(enemies.begin());
-			}
-
-			if (enemies[0].GetY() == 23) {
-				score++;
-			}
-
-			//generateCart();
-			player.PutUnit(auxiliaryField, true);
-
-			for (size_t i = 0; i < gameField.size(); i++) {
-				for (size_t j = 0; j < gameField[0].size(); j++) {
-					gameField[i][j] = auxiliaryField[i + 4][j];
-				}
-			}
-			Sleep(delay);
-
-			return !CheckCollision(); // check for lost
+		return !CheckCollision(); // check for lost
 	}
 
 	bool CheckDist() {
@@ -108,6 +107,14 @@ public:
 			counter = 0;
 			return true;
 		}
+	}
+
+	size_t GetDelay() override {
+		return delay;
+	}
+
+	void SetDelay(size_t delay) {
+		this->delay = delay;
 	}
 };
 

@@ -1,5 +1,6 @@
 #include "Tetris.h"
 #include "Racing.h"
+#include "Game.h"
 
 void Tetris::ShowChar(int x, int y, char character) {
 	COORD cord;
@@ -53,24 +54,25 @@ Moves Tetris::Move() {
 			return Moves::RIGHT;
 			break;
 			//Enter
-		case 13:
+		case 32: case 13:
 			return Moves::ENTER;
 			break;
 		}
 	}
+	return Moves::NONE;
 }
 
 void Tetris::Play() {
-
-
+	//Test
+	Game *arr[1];
 	Racing rc;
-	
-	//rc.Play(gameField, score);
+	arr[0] = &rc;
+	//games.push_back(rc);
 	bool isLose;
 	do {
-		isLose = rc.Play(gameField, score, Move());
+		isLose = arr[0]->Play(gameField, score, Move());
 		Update();
-
+		Sleep(arr[0]->GetDelay());
 	} while (isLose);
 }
 
@@ -91,13 +93,13 @@ Tetris::Tetris() {
 	score = 0;
 	lastScore = 1;
 	
-	/*for (size_t i = 0; i < height; i++) {
+	for (size_t i = 0; i < height; i++) {
 		for (size_t j = 0; j < width; j++) {
 			gameField[i][j] = true;
 			Update();
 			Sleep(10);
 		}
-	}*/	
+	}
 }
 
 void Tetris::Update() {

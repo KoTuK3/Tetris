@@ -8,10 +8,17 @@ private:
 	bool side; // false - left, true - right
 	bool lastSide;
 
+	size_t delay; // For speed
+	size_t minDelay;
+	size_t maxDelay;
+
 public:
 	RacingPlayer() {}
 
 	RacingPlayer(vector<vector<bool>>& auxiliaryField) {
+		minDelay = 40;
+		maxDelay = 80;
+
 		GenerateUnit();
 		PutUnit(auxiliaryField, true);
 	}
@@ -47,6 +54,12 @@ public:
 				side = false; break;
 			case Moves::RIGHT:
 				side = true; break;
+			case Moves::ENTER:
+				if (minDelay != maxDelay)
+					SetDelay(minDelay); break;
+			case Moves::NONE:
+				if (maxDelay != minDelay)
+					SetDelay(maxDelay); break;
 		}
 		// update x after move
 		x = int(side) * 3 + 3;
@@ -62,6 +75,14 @@ public:
 
 	void SetLastSide(bool side) {
 		this->lastSide = side;
+	}
+
+	size_t GetDelay() {
+		return delay;
+	}
+
+	void SetDelay(size_t delay) {
+		this->delay = delay;
 	}
 };
 
