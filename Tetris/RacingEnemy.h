@@ -5,9 +5,7 @@
 class RacingEnemy : public Unit {
 private:
 	bool side; // false - left, true - right
-	size_t y;
-	size_t x;
-
+	
 public:
 	RacingEnemy() {}
 
@@ -42,15 +40,15 @@ public:
 		y += 1;
 	}
 
-	size_t GetY() {
+	size_t GetY() const {
 		return y;
 	}
 
-	size_t GetX(bool side) {
+	size_t GetX(bool side) const {
 		return int(side) * 3 + 3;
 	}
 
-	bool GetSide() {
+	bool GetSide() const {
 		return side;
 	}
 };

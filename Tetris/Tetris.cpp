@@ -1,5 +1,6 @@
 #include "Tetris.h"
 #include "Racing.h"
+#include "Snake.h"
 #include "Game.h"
 
 void Tetris::ShowChar(int x, int y, char character) {
@@ -64,12 +65,14 @@ Moves Tetris::Move() {
 
 void Tetris::Play() {
 	Racing racing;
+	Snake snake;
+	games.push_back(&snake);
 	games.push_back(&racing);
 
 	bool isLose = true;
 	do {
-		//isLose = games[0]->Play(gameField, score, Move());
-		games[0]->Preview(gameField);
+		isLose = games[0]->Play(gameField, score, Move());
+		//games[0]->Preview(gameField);
 		Update();
 		Sleep(games[0]->GetDelay());
 	} while (isLose);
@@ -81,7 +84,7 @@ Tetris::Tetris() {
 	structCursorInfo.bVisible = FALSE;
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &structCursorInfo);
 
-	system("mode con cols=150 lines=40");
+	system("mode con cols=150 lines=50");
 
 	height = 20;
 	width = 10;

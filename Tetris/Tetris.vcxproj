@@ -142,6 +142,9 @@
     <ClCompile Include="Racing.cpp" />
     <ClCompile Include="RacingEnemy.cpp" />
     <ClCompile Include="RacingPlayer.cpp" />
+    <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="SnakeFood.cpp" />
+    <ClCompile Include="SnakePlayer.cpp" />
     <ClCompile Include="Tetris.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +153,9 @@
     <ClInclude Include="Racing.h" />
     <ClInclude Include="RacingEnemy.h" />
     <ClInclude Include="RacingPlayer.h" />
+    <ClInclude Include="Snake.h" />
+    <ClInclude Include="SnakeFood.h" />
+    <ClInclude Include="SnakePlayer.h" />
     <ClInclude Include="Tetris.h" />
     <ClInclude Include="Unit.h" />
   </ItemGroup>

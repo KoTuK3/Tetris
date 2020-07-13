@@ -22,6 +22,9 @@
     <Filter Include="Header Files\Games\Racing">
       <UniqueIdentifier>{9a33d603-89e4-49db-b0f7-87c636576b41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Games\Snake">
+      <UniqueIdentifier>{55363e80-3a70-4e67-a01c-baf4db650e5b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -37,6 +40,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RacingEnemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SnakePlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SnakeFood.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Snake.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -61,6 +73,15 @@
     </ClInclude>
     <ClInclude Include="Helpers.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SnakePlayer.h">
+      <Filter>Header Files\Games\Snake</Filter>
+    </ClInclude>
+    <ClInclude Include="Snake.h">
+      <Filter>Header Files\Games\Snake</Filter>
+    </ClInclude>
+    <ClInclude Include="SnakeFood.h">
+      <Filter>Header Files\Games\Snake</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -65,11 +65,11 @@ public:
 		x = GetX(side);
 	}
 
-	bool GetSide() {
+	bool GetSide() const {
 		return side;
 	}
 
-	bool GetLastSide() {
+	bool GetLastSide() const {
 		return lastSide;
 	}
 
@@ -77,7 +77,7 @@ public:
 		this->lastSide = side;
 	}
 
-	size_t GetDelay() {
+	size_t GetDelay() const {
 		return delay;
 	}
 
@@ -85,7 +85,7 @@ public:
 		this->delay = delay;
 	}
 
-	size_t GetX(bool side) {
+	size_t GetX(bool side) const {
 		return int(side) * 3 + 3;
 	}
 };
