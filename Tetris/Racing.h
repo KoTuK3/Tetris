@@ -97,6 +97,21 @@ public:
 		return !CheckCollision(); // check for lost
 	}
 
+	void Preview(vector<vector<bool>>& gameField) override {
+		size_t localScore = 0;
+		Moves move = Moves::NONE;
+
+		if (enemies[0].GetSide() == player.GetSide() && enemies[0].GetY() >= 17) {
+			if (player.GetSide() == false)
+				move = Moves::RIGHT;
+			else if (player.GetSide() == true)
+				move = Moves::LEFT;
+		}
+		
+		Play(gameField, localScore, move);
+		Sleep(delay);
+	}
+
 	bool CheckDist() {
 		if (counter < dist) {
 			counter++;

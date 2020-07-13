@@ -24,7 +24,7 @@ private:
 	// display id used for output to the console
 	vector<vector<bool>> display;
 
-	vector<Game> games;
+	vector<Game*> games;
 	
 	void ShowChar(int x, int y, char character);
 	void ShowString(int x, int y, string str);

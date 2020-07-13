@@ -63,16 +63,15 @@ Moves Tetris::Move() {
 }
 
 void Tetris::Play() {
-	//Test
-	Game *arr[1];
-	Racing rc;
-	arr[0] = &rc;
-	//games.push_back(rc);
-	bool isLose;
+	Racing racing;
+	games.push_back(&racing);
+
+	bool isLose = true;
 	do {
-		isLose = arr[0]->Play(gameField, score, Move());
+		//isLose = games[0]->Play(gameField, score, Move());
+		games[0]->Preview(gameField);
 		Update();
-		Sleep(arr[0]->GetDelay());
+		Sleep(games[0]->GetDelay());
 	} while (isLose);
 }
 

@@ -19,7 +19,7 @@ public:
 	void GenerateUnit() override {
 		side = rand() % 2;
 		y = 2;
-		x = int(side) * 3 + 3;
+		x = GetX(side);
 	}
 	//Is create should be true
 	void PutUnit(vector<vector<bool>>& gameField, bool isCreate) override {
@@ -44,6 +44,10 @@ public:
 
 	size_t GetY() {
 		return y;
+	}
+
+	size_t GetX(bool side) {
+		return int(side) * 3 + 3;
 	}
 
 	bool GetSide() {

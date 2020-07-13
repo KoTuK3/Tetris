@@ -27,7 +27,7 @@ public:
 		side = bool(rand() % 2);
 		lastSide = false;
 
-		x = int(side) * 3 + 3;
+		x = GetX(side);
 		y = 21; // spawn line
 	}
 
@@ -62,7 +62,7 @@ public:
 					SetDelay(maxDelay); break;
 		}
 		// update x after move
-		x = int(side) * 3 + 3;
+		x = GetX(side);
 	}
 
 	bool GetSide() {
@@ -83,6 +83,10 @@ public:
 
 	void SetDelay(size_t delay) {
 		this->delay = delay;
+	}
+
+	size_t GetX(bool side) {
+		return int(side) * 3 + 3;
 	}
 };
 
