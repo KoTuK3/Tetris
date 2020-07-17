@@ -63,19 +63,89 @@ Moves Tetris::Move() {
 	return Moves::NONE;
 }
 
-void Tetris::Play() {
-	Racing racing;
-	Snake snake;
-	games.push_back(&snake);
-	games.push_back(&racing);
+void Tetris::Play(int index) {
+	if (index >= 0 && index < games.size()) {
+		bool isLose = true;
+		do {
+			isLose = games[index]->Play(gameField, score, Move());
+			//games[index]->Preview(gameField);
+			Update();
+			Sleep(games[index]->GetDelay());
+		} while (isLose);
+		Reset(index);
+	}
+}
 
-	bool isLose = true;
-	do {
-		isLose = games[0]->Play(gameField, score, Move());
-		//games[0]->Preview(gameField);
+void Tetris::Preview(int index) {
+	if (index >= 0 && index < games.size()) {
+		games[index]->Preview(gameField);
 		Update();
-		Sleep(games[0]->GetDelay());
-	} while (isLose);
+		Sleep(games[index]->GetDelay());
+	}
+}
+
+void Tetris::Reset(int index) {
+	ClearDisplay();
+	games[index]->Reset();
+	score = 0;
+	lastScore = 1;
+}
+
+void Tetris::Menu() {
+	int index = 0;
+	Moves move;
+	do {
+		Preview(index);
+
+		move = Move();
+		switch (move) {
+			case Moves::RIGHT:
+				Reset(index);
+				index += 1;
+				break;
+			case Moves::LEFT:
+				Reset(index);
+				index -= 1;
+				break;
+			case Moves::ENTER:
+				Reset(index);
+				Animation();
+				Play(index);
+				Reset(index);
+				Animation();
+				break;
+			case Moves::NONE:
+				break;
+		}
+		if (index == -1)
+			index = games.size() - 1;
+		else if (index == games.size())
+			index = 0;
+
+	} while (true);
+
+
+}
+
+void Tetris::ClearDisplay() {
+	for (size_t i = 0; i < height; i++) {
+		for (size_t j = 0; j < width; j++) {
+			gameField[i][j] = false;
+			ShowChar(j * 2, i, 176);
+			ShowChar(j * 2 + 1, i, 176);
+		}
+	}
+	Update();
+}
+
+void Tetris::Animation() {
+	for (size_t i = 0; i < height; i++) {
+		for (size_t j = 0; j < width; j++) {
+			gameField[i][j] = true;
+			Update();
+			Sleep(10);
+		}
+	}
 }
 
 Tetris::Tetris() {
@@ -95,13 +165,10 @@ Tetris::Tetris() {
 	score = 0;
 	lastScore = 1;
 	
-	for (size_t i = 0; i < height; i++) {
-		for (size_t j = 0; j < width; j++) {
-			gameField[i][j] = true;
-			Update();
-			Sleep(10);
-		}
-	}
+	// Start preview
+	ClearDisplay();
+
+	Animation();
 }
 
 void Tetris::Update() {
@@ -114,7 +181,9 @@ void Tetris::Update() {
 					ShowChar(j * 2 + 1, i, 219);
 				}
 				else {
-					ShowString(j * 2, i, "  ");
+					ShowChar(j * 2, i, 176);
+					ShowChar(j * 2 + 1, i, 176);
+					//ShowString(j * 2, i, "  ");
 				}
 			}
 		}
@@ -132,4 +201,8 @@ void Tetris::Update() {
 		ShowString((width + 1) * 2, 0, "Score:");
 		ShowString((width + 1) * 2, 1, str);
 	}
+}
+
+void Tetris::AddGame(Game* game) {
+	games.push_back(game);
 }

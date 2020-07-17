@@ -25,6 +25,15 @@
     <Filter Include="Header Files\Games\Snake">
       <UniqueIdentifier>{55363e80-3a70-4e67-a01c-baf4db650e5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Games">
+      <UniqueIdentifier>{21d4af2c-bee4-4f44-b626-8cfd0ae68022}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Games\Racing">
+      <UniqueIdentifier>{2fe02546-3856-4ca1-b86c-57a2ddafbc7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Games\Snake">
+      <UniqueIdentifier>{74ecc7dc-ea8d-43a4-b4f1-3d8d6b5c0b19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -34,22 +43,22 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Racing.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RacingPlayer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Games\Racing</Filter>
     </ClCompile>
     <ClCompile Include="RacingEnemy.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Games\Racing</Filter>
     </ClCompile>
-    <ClCompile Include="SnakePlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SnakeFood.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="RacingPlayer.cpp">
+      <Filter>Source Files\Games\Racing</Filter>
     </ClCompile>
     <ClCompile Include="Snake.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Games\Snake</Filter>
+    </ClCompile>
+    <ClCompile Include="SnakeFood.cpp">
+      <Filter>Source Files\Games\Snake</Filter>
+    </ClCompile>
+    <ClCompile Include="SnakePlayer.cpp">
+      <Filter>Source Files\Games\Snake</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

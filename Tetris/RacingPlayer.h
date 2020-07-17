@@ -14,79 +14,17 @@ private:
 
 public:
 	RacingPlayer() {}
+	RacingPlayer(vector<vector<bool>>& auxiliaryField);
 
-	RacingPlayer(vector<vector<bool>>& auxiliaryField) {
-		minDelay = 40;
-		maxDelay = 80;
+	void GenerateUnit() override;
+	void PutUnit(vector<vector<bool>>& gameField, bool isCreate) override;
+	void Move(Moves moves) override;
 
-		GenerateUnit();
-		PutUnit(auxiliaryField, true);
-	}
+	bool GetSide() const;
+	bool GetLastSide() const;
+	size_t GetX(bool side) const;
+	size_t GetDelay() const;
 
-	void GenerateUnit() override {
-		side = bool(rand() % 2);
-		lastSide = false;
-
-		x = GetX(side);
-		y = 21; // spawn line
-	}
-
-	void PutUnit(vector<vector<bool>>& gameField, bool isCreate) override {
-		/*
-		  #
-		# # #
-		  #
-		#   #
-		*/
-		gameField[y][x] =
-		gameField[y][x - 1] =
-		gameField[y][x + 1] =
-		gameField[y - 1][x] =
-		gameField[y + 1][x] =
-		gameField[y + 2][x - 1] =
-		gameField[y + 2][x + 1] = isCreate;
-	}
-
-	void Move(Moves moves) override {
-		lastSide = side;
-		switch (moves) {
-			case Moves::LEFT:
-				side = false; break;
-			case Moves::RIGHT:
-				side = true; break;
-			case Moves::ENTER:
-				if (minDelay != maxDelay)
-					SetDelay(minDelay); break;
-			case Moves::NONE:
-				if (maxDelay != minDelay)
-					SetDelay(maxDelay); break;
-		}
-		// update x after move
-		x = GetX(side);
-	}
-
-	bool GetSide() const {
-		return side;
-	}
-
-	bool GetLastSide() const {
-		return lastSide;
-	}
-
-	void SetLastSide(bool side) {
-		this->lastSide = side;
-	}
-
-	size_t GetDelay() const {
-		return delay;
-	}
-
-	void SetDelay(size_t delay) {
-		this->delay = delay;
-	}
-
-	size_t GetX(bool side) const {
-		return int(side) * 3 + 3;
-	}
+	void SetLastSide(bool side);
+	void SetDelay(size_t delay);
 };
-

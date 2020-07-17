@@ -11,16 +11,8 @@ private:
 	Coord coord;
 
 public:
-	void CreateFood(vector<vector<bool>>& gameField) {
-		do {
-			coord.x = rand() % 10;
-			coord.y = rand() % 20;
-		} while (gameField[coord.y][coord.x]);
-		gameField[coord.y][coord.x] = true;
-	}
+	void CreateFood(vector<vector<bool>>& gameField);
 
-	Coord GetCoord() {
-		return coord;
-	}
+	Coord GetCoord();
 };
 

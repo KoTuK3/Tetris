@@ -34,7 +34,12 @@ private:
 public:
 	Tetris();
 	void Update();
-	void Play();
-
+	void AddGame(Game* game);
+	void Play(int index);
+	void Preview(int index);
+	void Reset(int index);
+	void Menu();
+	void ClearDisplay();
+	void Animation();
 };
 
