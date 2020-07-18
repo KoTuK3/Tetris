@@ -1,6 +1,8 @@
 #include <iostream>
 #include <ctime>
 
+#include "SFML/Graphics.hpp"
+
 #include "Tetris.h"
 #include "Racing.h"
 #include "Snake.h"
@@ -9,6 +11,7 @@
 using namespace std;
 
 int main() {
+
 	srand((unsigned)time(nullptr));
 	Tetris tetris;
 	Racing racing;
@@ -19,6 +22,7 @@ int main() {
 	tetris.AddGame(&tetrisGame);
 
 	//tetris.Play(2);
-	tetris.Menu();
+	//tetris.Menu();
+	tetris.MenuSFML();
 	return 0;
 }

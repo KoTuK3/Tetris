@@ -95,7 +95,6 @@ void Racing::Preview(vector<vector<bool>>& gameField) {
 	}
 
 	Play(gameField, localScore, move);
-	Sleep(delay);
 }
 
 bool Racing::CheckDist() {
