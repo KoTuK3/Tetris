@@ -40,10 +40,10 @@ void RacingPlayer::Move(Moves moves) {
 	case Moves::RIGHT:
 		side = true; break;
 	case Moves::ENTER: case Moves::UP:
-		if (minDelay != maxDelay)
+		if (minDelay != delay)
 			SetDelay(minDelay); break;
 	case Moves::NONE:
-		if (maxDelay != minDelay)
+		if (maxDelay != delay)
 			SetDelay(maxDelay); break;
 	}
 	// update x after move

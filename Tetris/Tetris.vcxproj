@@ -146,6 +146,7 @@
     <ClCompile Include="SnakeFood.cpp" />
     <ClCompile Include="SnakePlayer.cpp" />
     <ClCompile Include="Tetris.cpp" />
+    <ClCompile Include="TetrisGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -157,6 +158,7 @@
     <ClInclude Include="SnakeFood.h" />
     <ClInclude Include="SnakePlayer.h" />
     <ClInclude Include="Tetris.h" />
+    <ClInclude Include="TetrisGame.h" />
     <ClInclude Include="Unit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

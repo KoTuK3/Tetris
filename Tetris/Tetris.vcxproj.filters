@@ -34,6 +34,12 @@
     <Filter Include="Source Files\Games\Snake">
       <UniqueIdentifier>{74ecc7dc-ea8d-43a4-b4f1-3d8d6b5c0b19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Games\Tetris">
+      <UniqueIdentifier>{5b287991-ea55-4e71-ab83-b230400c2925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TetrisGame">
+      <UniqueIdentifier>{db459f6d-8446-4ec9-bdfa-5f1bea8a7493}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -59,6 +65,9 @@
     </ClCompile>
     <ClCompile Include="SnakePlayer.cpp">
       <Filter>Source Files\Games\Snake</Filter>
+    </ClCompile>
+    <ClCompile Include="TetrisGame.cpp">
+      <Filter>Source Files\TetrisGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="SnakeFood.h">
       <Filter>Header Files\Games\Snake</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrisGame.h">
+      <Filter>Header Files\Games\Tetris</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

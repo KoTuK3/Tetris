@@ -16,4 +16,8 @@ struct Coord {
 	bool operator == (const Coord& coord) const {
 		return (this->x == coord.x && this->y == coord.y);
 	}
+
+	bool operator != (const Coord& coord) const {
+		return (this->x != coord.x || this->y != coord.y);
+	}
 };

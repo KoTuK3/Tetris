@@ -172,9 +172,11 @@ Tetris::Tetris() {
 }
 
 void Tetris::Update() {
+	bool isUpdated = false;
 	for (size_t i = 0; i < height; i++) {
 		for (size_t j = 0; j < width; j++) {
 			if (display[i][j] != gameField[i][j]) {
+				isUpdated = true;
 				display[i][j] = gameField[i][j];
 				if (display[i][j]) {
 					ShowChar(j * 2, i, 219);
@@ -187,7 +189,8 @@ void Tetris::Update() {
 				}
 			}
 		}
-		cout << endl;
+		if (isUpdated)
+			cout << endl;
 	}
 
 	if (score != lastScore) {
