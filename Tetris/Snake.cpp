@@ -9,7 +9,7 @@ Snake::Snake() {
 }
 
 void Snake::Reset() {
-	auxiliaryField = vector<vector<bool>>(height, vector<bool>(width, 0));
+	auxiliaryField = vector<vector<Colors>>(height, vector<Colors>(width, Colors::NONE));
 	snake = SnakePlayer();
 	food = SnakeFood();
 
@@ -18,7 +18,7 @@ void Snake::Reset() {
 	food.CreateFood(auxiliaryField);
 }
 
-bool Snake::Play(vector<vector<bool>>& gameField, size_t& score, Moves move) {
+bool Snake::Play(vector<vector<Colors>>& gameField, size_t& score, Moves move) {
 	snake.Move(move);
 	if (!snake.CheckCollision()) {
 		snake.UpdateSnake();
@@ -37,7 +37,7 @@ bool Snake::Play(vector<vector<bool>>& gameField, size_t& score, Moves move) {
 
 		score = (snake.GetLength() - 1) * 100;
 	}
-
+	
 	return !snake.CheckCollision();
 }
 
@@ -45,7 +45,7 @@ size_t Snake::GetDelay() {
 	return delay;
 }
 
-void Snake::Preview(vector<vector<bool>>& gameField) {
+void Snake::Preview(vector<vector<Colors>>& gameField) {
 	size_t localScore = 0;
 	Coord coord = snake.GetCoord();
 	Moves move = snake.GetMoves();

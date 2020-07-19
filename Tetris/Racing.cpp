@@ -12,14 +12,16 @@ Racing::Racing() {
 }
 
 void Racing::Reset() {
+	wallsColor = Colors::YELLOW;
+
 	counter = 0;
-	auxiliaryField = vector<vector<bool>>(height, vector<bool>(width, false));
+	auxiliaryField = vector<vector<Colors>>(height, vector<Colors>(width, Colors::NONE));
 
 	//Generate walls
 	for (int i = 0; i < height; i++) {
 		if (i % 4 != 0) {
-			auxiliaryField[i][0] = 1;
-			auxiliaryField[i][width - 1] = 1;
+			auxiliaryField[i][0] =
+			auxiliaryField[i][width - 1] = wallsColor;
 		}
 	}
 
@@ -35,9 +37,14 @@ bool Racing::CheckCollision() {
 	return false;
 }
 
-bool Racing::Play(vector<vector<bool>>& gameField, size_t& score, Moves moves) {
-
-	bool isWall = auxiliaryField[height - 1][0];
+bool Racing::Play(vector<vector<Colors>>& gameField, size_t& score, Moves moves) {
+	bool isWall = false;
+	if (auxiliaryField[height - 1][0] == Colors::NONE) {
+		isWall = false;
+	}
+	else {
+		isWall = true;
+	}
 
 	player.PutUnit(auxiliaryField, false);
 
@@ -50,8 +57,13 @@ bool Racing::Play(vector<vector<bool>>& gameField, size_t& score, Moves moves) {
 	}
 
 	auxiliaryField.pop_back();
-	vector<bool> newRow(width, 0);
-	newRow[0] = newRow[width - 1] = isWall;
+	vector<Colors> newRow(width, Colors::NONE);
+
+	if (isWall)
+		newRow[0] = newRow[width - 1] = wallsColor;
+	else
+		newRow[0] = newRow[width - 1] = Colors::NONE;
+
 	auxiliaryField.insert(auxiliaryField.begin(), newRow);
 
 	if (CheckDist()) {
@@ -83,7 +95,7 @@ bool Racing::Play(vector<vector<bool>>& gameField, size_t& score, Moves moves) {
 	return !CheckCollision(); // check for lost
 }
 
-void Racing::Preview(vector<vector<bool>>& gameField) {
+void Racing::Preview(vector<vector<Colors>>& gameField) {
 	size_t localScore = 0;
 	Moves move = Moves::NONE;
 

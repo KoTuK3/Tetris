@@ -12,17 +12,19 @@ private:
 	size_t counter;
 	size_t dist;
 
-	vector<vector<bool>> auxiliaryField;
+	vector<vector<Colors>> auxiliaryField;
 
 	RacingPlayer player;
 	vector<RacingEnemy> enemies;
+
+	Colors wallsColor;
 
 public:
 	Racing();
 
 	void Reset() override;
-	bool Play(vector<vector<bool>>& gameField, size_t& score, Moves moves) override;
-	void Preview(vector<vector<bool>>& gameField) override;
+	bool Play(vector<vector<Colors>>& gameField, size_t& score, Moves moves) override;
+	void Preview(vector<vector<Colors>>& gameField) override;
 
 	bool CheckCollision();
 	bool CheckDist();

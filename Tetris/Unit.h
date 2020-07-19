@@ -15,7 +15,7 @@ public:
 	// This method generate x, y that match the rule
 	virtual void GenerateUnit() = 0;
 	// This method puts unit on the map
-	virtual void PutUnit(vector<vector<bool>>& gameField, bool isCreate) = 0; // if isCreate true we create, else we remove
+	virtual void PutUnit(vector<vector<Colors>>& gameField, bool isCreate) = 0; // if isCreate true we create, else we remove
 	virtual void Move(Moves moves) = 0;
 
 };

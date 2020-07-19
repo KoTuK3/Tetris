@@ -1,11 +1,12 @@
 #include "SnakeFood.h"
 
-void SnakeFood::CreateFood(vector<vector<bool>>& gameField) {
+void SnakeFood::CreateFood(vector<vector<Colors>>& gameField) {
+	color = Colors::GREEN;
 	do {
 		coord.x = rand() % 10;
 		coord.y = rand() % 20;
-	} while (gameField[coord.y][coord.x]);
-	gameField[coord.y][coord.x] = true;
+	} while (gameField[coord.y][coord.x] != Colors::NONE);
+	gameField[coord.y][coord.x] = color;
 }
 
 Coord SnakeFood::GetCoord() {

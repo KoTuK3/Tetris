@@ -12,6 +12,8 @@ void SnakePlayer::GenerateUnit() {
 	lastCoord.x = 0;
 	lastCoord.y = 0;
 	snake.push_back(head);
+
+	color = Colors::ORANGE;
 }
 
 void SnakePlayer::UpdateSnake() {
@@ -26,11 +28,15 @@ void SnakePlayer::UpdateSnake() {
 	snake.insert(iter, newHead);
 }
 
-void SnakePlayer::PutUnit(vector<vector<bool>>& gameField, bool isCreate) {
-	for (size_t i = 0; i < snake.size(); i++)
-		gameField[snake[i].y][snake[i].x] = true;
+void SnakePlayer::PutUnit(vector<vector<Colors>>& gameField, bool isCreate) {
+	Colors localColor = Colors::NONE;
+	if (isCreate)
+		localColor = color;
 
-	gameField[lastCoord.y][lastCoord.x] = false;
+	for (size_t i = 0; i < snake.size(); i++)
+		gameField[snake[i].y][snake[i].x] = localColor;
+
+	gameField[lastCoord.y][lastCoord.x] = Colors::NONE;
 }
 
 void SnakePlayer::Move(Moves moves) {

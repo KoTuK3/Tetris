@@ -11,13 +11,14 @@ private:
 	size_t delay; // For speed
 	size_t minDelay;
 	size_t maxDelay;
+	Colors color;
 
 public:
 	RacingPlayer() {}
-	RacingPlayer(vector<vector<bool>>& auxiliaryField);
+	RacingPlayer(vector<vector<Colors>>& auxiliaryField);
 
 	void GenerateUnit() override;
-	void PutUnit(vector<vector<bool>>& gameField, bool isCreate) override;
+	void PutUnit(vector<vector<Colors>>& gameField, bool isCreate) override;
 	void Move(Moves moves) override;
 
 	bool GetSide() const;

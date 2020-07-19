@@ -9,7 +9,7 @@ private:
 	size_t height;
 	size_t width;
 	size_t delay;
-	vector<vector<bool>> auxiliaryField;
+	vector<vector<Colors>> auxiliaryField;
 	SnakePlayer snake;
 	SnakeFood food;
 
@@ -17,8 +17,8 @@ public:
 	Snake();
 
 	void Reset() override;
-	bool Play(vector<vector<bool>>& gameField, size_t& score, Moves move) override;
-	void Preview(vector<vector<bool>>& gameField) override;
+	bool Play(vector<vector<Colors>>& gameField, size_t& score, Moves move) override;
+	void Preview(vector<vector<Colors>>& gameField) override;
 	size_t GetDelay() override;
 };
 

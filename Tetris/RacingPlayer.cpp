@@ -1,6 +1,6 @@
 #include "RacingPlayer.h"
 
-RacingPlayer::RacingPlayer(vector<vector<bool>>& auxiliaryField) {
+RacingPlayer::RacingPlayer(vector<vector<Colors>>& auxiliaryField) {
 	minDelay = 40;
 	maxDelay = 80;
 
@@ -9,6 +9,7 @@ RacingPlayer::RacingPlayer(vector<vector<bool>>& auxiliaryField) {
 }
 
 void RacingPlayer::GenerateUnit() {
+	color = Colors::BLUE;
 	side = bool(rand() % 2);
 	lastSide = false;
 
@@ -16,7 +17,11 @@ void RacingPlayer::GenerateUnit() {
 	y = 21; // spawn line
 }
 
-void RacingPlayer::PutUnit(vector<vector<bool>>& gameField, bool isCreate) {
+void RacingPlayer::PutUnit(vector<vector<Colors>>& gameField, bool isCreate) {
+	Colors localColor = Colors::NONE;
+	if (isCreate) {
+		localColor = color;
+	}
 	/*
 	  #
 	# # #
@@ -29,7 +34,7 @@ void RacingPlayer::PutUnit(vector<vector<bool>>& gameField, bool isCreate) {
 		gameField[y - 1][x] =
 		gameField[y + 1][x] =
 		gameField[y + 2][x - 1] =
-		gameField[y + 2][x + 1] = isCreate;
+		gameField[y + 2][x + 1] = localColor;
 }
 
 void RacingPlayer::Move(Moves moves) {

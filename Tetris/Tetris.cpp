@@ -11,14 +11,14 @@ Tetris::Tetris() {
 	height = 20;
 	width = 10;
 
-	gameField = vector<vector<bool>>(height, vector<bool>(width, 0));
-	display = vector<vector<bool>>(height, vector<bool>(width, 0));
+	gameField = vector<vector<Colors>>(height, vector<Colors>(width, Colors::NONE));
+	display = vector<vector<Colors>>(height, vector<Colors>(width, Colors::NONE));
 
 	score = 0;
 	lastScore = 1;
 
 	pixelSize = 36;
-	texturePixelSize = 16;
+	texturePixelSize = 18;
 
 	isPlaying = false;
 }
@@ -117,16 +117,16 @@ void Tetris::Play(int index) {
 	}
 }
 
-void Tetris::Play(RenderWindow& window, Sprite& sprite, int index) {
+void Tetris::Play(RenderWindow& window, Sprite& sprite, Text& text, int index) {
 	if (index >= 0 && index < games.size()) {
 		bool isLose = true;
 		do {
 			isLose = games[index]->Play(gameField, score, Move());
-			Update(window, sprite);
+			Update(window, sprite, text);
 			Sleep(games[index]->GetDelay());
 		} while (isLose);
 
-		Reset(window, sprite, index);
+		Reset(window, index);
 	}
 }
 
@@ -138,8 +138,11 @@ void Tetris::PlayingMode(RenderWindow& window, Sprite& sprite, Moves move, int i
 
 		if (isLose)
 			isPlaying = true;
-		else
+		else {
+			Reset(window, index);
 			isPlaying = false;
+			isAnimation = true;
+		}
 	}
 }
 
@@ -158,8 +161,8 @@ void Tetris::Reset(int index) {
 	lastScore = 1;
 }
 
-void Tetris::Reset(RenderWindow& window, Sprite& sprite, int index) {
-	ClearDisplay(window, sprite);
+void Tetris::Reset(RenderWindow& window, int index) {
+	ClearDisplay(window);
 	games[index]->Reset();
 	score = 0;
 	lastScore = 1;
@@ -209,8 +212,6 @@ void Tetris::Menu() {
 			index = 0;
 
 	} while (true);
-
-
 }
 
 void Tetris::MenuSFML() {
@@ -223,34 +224,33 @@ void Tetris::MenuSFML() {
 	Vector2f backgroundSize(pixelSize * width, pixelSize * height);
 	Vector2f spriteSize(pixelSize, pixelSize);
 
+	Font font;
 	Texture texture, textureBackground;
-	texture.loadFromFile(".\\images\\orange.png");
+	texture.loadFromFile(".\\images\\tiles.png");
 	textureBackground.loadFromFile(".\\images\\background.png");
-	
-	//texture.loadFromFile("D:\\Step\\C++\\Tetris\\Tetris\\images\\tiles.png");
 
 	//Sprites
 	Sprite sprite(texture), spriteBackground(textureBackground);
 
+	font.loadFromFile(".\\font\\Grand9K Pixel.ttf");
 
-	sprite.setTextureRect(IntRect(0, 0, texturePixelSize, texturePixelSize));
-
-	sprite.setScale(
-		spriteSize.x / sprite.getLocalBounds().width,
-		spriteSize.y / sprite.getLocalBounds().height
-	);
-
-
+	Text text("Score: \n000000", font, 25);
+	text.setPosition(pixelSize * width + 15, 30);
+	
 
 	spriteBackground.setScale(
 		backgroundSize.x / spriteBackground.getLocalBounds().width,
 		backgroundSize.y / spriteBackground.getLocalBounds().height
 	);
 
-
 	Moves move = Moves::NONE;
 
 	int index = 0;
+
+	size_t i, j;
+	i = j = 0;
+	animColor = Colors(rand() % 7);
+	isAnimation = true;
 
 	while (window.isOpen()) {
 		Event event;
@@ -267,7 +267,10 @@ void Tetris::MenuSFML() {
 			}
 		}
 
-		if (isPlaying) {
+		if (isAnimation) {
+			Animation(window, index, i, j);
+		}
+		else if (isPlaying) {
 			PlayingMode(window, sprite, move, index);
 		}
 		else {
@@ -277,27 +280,24 @@ void Tetris::MenuSFML() {
 
 		window.clear(Color(30, 30, 60, 0));
 		window.draw(spriteBackground);
+		window.draw(text);
 
-		Update(window, sprite);
-
-
-
+		Update(window, sprite, text);
 	}
 }
 
 void Tetris::MenuMode(RenderWindow& window, Sprite& sprite, Moves move, int& index) {
 	switch (move) {
 		case Moves::RIGHT:
-			Reset(window, sprite, index);
+			Reset(window, index);
 			index += 1;
 			break;
 		case Moves::LEFT:
-			Reset(window, sprite, index);
+			Reset(window, index);
 			index -= 1;
 			break;
 		case Moves::ENTER:
-			Reset(window, sprite, index);
-			//Animation(window, sprite);
+			isAnimation = true;
 			isPlaying = true;
 			break;
 	}
@@ -307,20 +307,20 @@ void Tetris::MenuMode(RenderWindow& window, Sprite& sprite, Moves move, int& ind
 		index = 0;
 }
 
-void Tetris::ClearDisplay(RenderWindow& window, Sprite& sprite) {
+void Tetris::ClearDisplay(RenderWindow& window) {
 	for (size_t i = 0; i < height; i++) {
 		for (size_t j = 0; j < width; j++) {
-			gameField[i][j] = false;
+			gameField[i][j] = Colors::NONE;
 		}
 	}
 
-	window.clear(Color(250, 220, 100, 0));
+	window.clear(Color(30, 30, 60, 0));
 }
 
 void Tetris::ClearDisplay() {
 	for (size_t i = 0; i < height; i++) {
 		for (size_t j = 0; j < width; j++) {
-			gameField[i][j] = false;
+			gameField[i][j] = Colors::NONE;
 			ShowChar(j * 2, i, 176);
 			ShowChar(j * 2 + 1, i, 176);
 		}
@@ -331,21 +331,32 @@ void Tetris::ClearDisplay() {
 void Tetris::Animation() {
 	for (size_t i = 0; i < height; i++) {
 		for (size_t j = 0; j < width; j++) {
-			gameField[i][j] = true;
+			gameField[i][j] = animColor;
 			Update();
 			Sleep(10);
 		}
 	}
 }
 
-void Tetris::Animation(RenderWindow& window, Sprite& sprite) {
-	for (size_t i = 0; i < height; i++) {
-		for (size_t j = 0; j < width; j++) {
-			gameField[i][j] = true;
-			Update(window, sprite);
-			Sleep(10);
-		}
+void Tetris::Animation(RenderWindow& window, int index, size_t& i,size_t& j) {
+	if (i == height - 1 && j == width - 1) {
+		gameField[i][j] = animColor;
+		isAnimation = false;
+		animColor = Colors(rand() % 7);
+		i = j = 0;
+		Reset(window, index);
 	}
+	else if (j == width - 1) {
+		gameField[i][j] = animColor;
+		j = 0;
+		i += 1;
+	}
+	else {
+		gameField[i][j] = animColor;
+		j += 1;
+	}
+
+	Sleep(10);
 }
 
 void Tetris::Update() {
@@ -355,7 +366,7 @@ void Tetris::Update() {
 			if (display[i][j] != gameField[i][j]) {
 				isUpdated = true;
 				display[i][j] = gameField[i][j];
-				if (display[i][j]) {
+				if (display[i][j] != Colors::NONE) {
 					ShowChar(j * 2, i, 219);
 					ShowChar(j * 2 + 1, i, 219);
 				}
@@ -382,18 +393,33 @@ void Tetris::Update() {
 	}
 }
 
-void Tetris::Update(RenderWindow& window, Sprite& sprite) {
+void Tetris::Update(RenderWindow& window, Sprite& sprite, Text& text) {
+
+	Vector2f spriteSize(pixelSize, pixelSize);
+	sprite.setScale(
+		spriteSize.x / sprite.getLocalBounds().width,
+		spriteSize.y / sprite.getLocalBounds().height
+	);
+
 	for (size_t i = 0; i < height; i++) {
 		for (size_t j = 0; j < width; j++) {
-			if (gameField[i][j] == true) {
+			if (gameField[i][j] != Colors::NONE) {
+				sprite.setTextureRect(IntRect(texturePixelSize * int(gameField[i][j]), 0, texturePixelSize, texturePixelSize));
 				sprite.setPosition(j * pixelSize, i * pixelSize);
 				window.draw(sprite);
 			}
 		}
 	}
 	//Add score
+	if (score != lastScore) {
+		lastScore = score;
+		string str = to_string(score);
 
-
+		while (str.length() < 6) {
+			str = '0' + str;
+		}
+		text.setString("Score: \n" + str);
+	}
 
 	window.display();
 }

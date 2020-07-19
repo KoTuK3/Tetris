@@ -10,12 +10,13 @@ private:
 	Moves moves;
 	int x;
 	int y;
+	Colors color;
 
 public:
 	SnakePlayer();
 
 	void GenerateUnit() override;
-	void PutUnit(vector<vector<bool>>& gameField, bool isCreate) override;
+	void PutUnit(vector<vector<Colors>>& gameField, bool isCreate) override;
 	void Move(Moves moves) override;
 
 	void UpdateSnake();

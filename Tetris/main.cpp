@@ -21,7 +21,6 @@ int main() {
 	tetris.AddGame(&snake);
 	tetris.AddGame(&tetrisGame);
 
-	//tetris.Play(2);
 	//tetris.Menu();
 	tetris.MenuSFML();
 	return 0;

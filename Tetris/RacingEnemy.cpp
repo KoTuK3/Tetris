@@ -1,17 +1,22 @@
 #include "RacingEnemy.h"
 
-RacingEnemy::RacingEnemy(vector<vector<bool>>& auxiliaryField) {
+RacingEnemy::RacingEnemy(vector<vector<Colors>>& auxiliaryField) {
 	GenerateUnit();
 	PutUnit(auxiliaryField, true);
 }
 
 void RacingEnemy::GenerateUnit() {
+	color = Colors::RED;
 	side = rand() % 2;
 	y = 2;
 	x = GetX(side);
 }
 
-void RacingEnemy::PutUnit(vector<vector<bool>>& gameField, bool isCreate) {
+void RacingEnemy::PutUnit(vector<vector<Colors>>& gameField, bool isCreate) {
+	Colors localColor = Colors::NONE;
+	if (isCreate) {
+		localColor = color;
+	}
 	/*
 	#   #
 	  #
@@ -24,7 +29,7 @@ void RacingEnemy::PutUnit(vector<vector<bool>>& gameField, bool isCreate) {
 		gameField[y - 1][x] =
 		gameField[y + 1][x] =
 		gameField[y - 2][x - 1] =
-		gameField[y - 2][x + 1] = isCreate;
+		gameField[y - 2][x + 1] = localColor;
 }
 
 void RacingEnemy::Move(Moves moves) {
