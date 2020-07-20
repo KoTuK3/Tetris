@@ -401,6 +401,7 @@ void Tetris::Update(RenderWindow& window, Sprite& sprite, Text& text) {
 		spriteSize.y / sprite.getLocalBounds().height
 	);
 
+	//Display
 	for (size_t i = 0; i < height; i++) {
 		for (size_t j = 0; j < width; j++) {
 			if (gameField[i][j] != Colors::NONE) {
@@ -410,7 +411,7 @@ void Tetris::Update(RenderWindow& window, Sprite& sprite, Text& text) {
 			}
 		}
 	}
-	//Add score
+	//Score score
 	if (score != lastScore) {
 		lastScore = score;
 		string str = to_string(score);

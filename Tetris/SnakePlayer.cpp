@@ -46,11 +46,17 @@ void SnakePlayer::Move(Moves moves) {
 			y -= 1;
 			SetMoves(moves);
 		}
+		else {
+			Move(GetMoves());
+		}
 		break;
 	case Moves::LEFT:
 		if (GetMoves() != Moves::RIGHT) {
 			x -= 1;
 			SetMoves(moves);
+		}
+		else {
+			Move(GetMoves());
 		}
 		break;
 	case Moves::DOWN:
@@ -58,11 +64,17 @@ void SnakePlayer::Move(Moves moves) {
 			y += 1;
 			SetMoves(moves);
 		}
+		else {
+			Move(GetMoves());
+		}
 		break;
 	case Moves::RIGHT:
 		if (GetMoves() != Moves::LEFT) {
 			x += 1;
 			SetMoves(moves);
+		}
+		else {
+			Move(GetMoves());
 		}
 		break;
 	case Moves::NONE:
