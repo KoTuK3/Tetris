@@ -37,7 +37,7 @@
     <Filter Include="Header Files\Games\Tetris">
       <UniqueIdentifier>{5b287991-ea55-4e71-ab83-b230400c2925}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Games\TetrisGame">
+    <Filter Include="Source Files\Games\Tetris">
       <UniqueIdentifier>{db459f6d-8446-4ec9-bdfa-5f1bea8a7493}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -67,7 +67,7 @@
       <Filter>Source Files\Games\Snake</Filter>
     </ClCompile>
     <ClCompile Include="TetrisGame.cpp">
-      <Filter>Source Files\Games\TetrisGame</Filter>
+      <Filter>Source Files\Games\Tetris</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
